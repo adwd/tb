@@ -9,15 +9,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@master
-      - name: Say start a build
-        run: echo flutter build web
       - uses: subosito/flutter-action@v1
         with:
           channel: "dev"
-
-      - name: Run a flutter build and deploy
+      - run: flutter config --enable-web
         working-directory: ./flutter_app
-        run: |
-          flutter config --enable-web
-          flutter pub get
-          flutter test
+      - run: flutter pub get
+        working-directory: ./flutter_app
+      - run: flutter test
+        working-directory: ./flutter_app
+      - run: flutter build web
+        working-directory: ./flutter_app
