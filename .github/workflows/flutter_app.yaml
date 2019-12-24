@@ -1,0 +1,22 @@
+name: Test Flutter App
+
+on: [push]
+
+jobs:
+  build:
+    name: Test Flutter App
+    runs-on: ubuntu-18.04
+
+    steps:
+      - uses: actions/checkout@master
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: "dev"
+      - run: flutter config --enable-web
+        working-directory: ./flutter_app
+      - run: flutter pub get
+        working-directory: ./flutter_app
+      - run: flutter test
+        working-directory: ./flutter_app
+      - run: flutter build web
+        working-directory: ./flutter_app
